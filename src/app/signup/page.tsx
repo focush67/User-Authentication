@@ -3,7 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
+import Header from "../Home/Header/page";
+import Footer from "../Home/Footer/page";
 import { CircularProgress } from "@mui/material";
 import {Alert} from '@mui/material';
 const SignUpPage = () => {
@@ -62,8 +63,9 @@ const SignUpPage = () => {
 
   },[user])
 
-  return (
-    <span className="bg-gray-300 min-h-screen flex flex-col">
+  return <>
+  <Header/>
+    <span className="bg-gray-300 min-h-[85vh] flex flex-col">
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm">
         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <h1 className="mb-8 text-3xl text-center font-semibold">Sign Up</h1>
@@ -144,7 +146,9 @@ const SignUpPage = () => {
         )}
       </div>
     </span>
-  );
+
+    <Footer/>
+  </>
 };
 
 export default SignUpPage;

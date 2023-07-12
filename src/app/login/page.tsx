@@ -1,9 +1,12 @@
-'use client';
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Alert, CircularProgress } from "@mui/material";
 import Link from "next/link";
+
+import Header from "../Home/Header/page";
+import Footer from "../Home/Footer/page";
 export default function LoginPage() {
   const router = useRouter();
   const [user, setUser] = useState({
@@ -11,7 +14,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
-
+  const [login, setLogin] = useState(false);
   const [load, setLoad] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -20,12 +23,16 @@ export default function LoginPage() {
     try {
       setLoad(true);
       setShowAlert(false);
-
+      
       const response = await axios.post("/api/users/login", user);
       const status = response.status;
 
       if (status === 400 || status === 409) {
         setShowAlert(true);
+        setTimeout(() => {
+          setShowAlert(false);
+        }, 5000);
+
       } else {
         console.log(response.data);
         router.push("/profile");
@@ -33,8 +40,13 @@ export default function LoginPage() {
     } catch (error) {
       console.error("Login failed:", error);
       setShowAlert(true);
+      setLogin(true);
+      setTimeout(() => {
+          setShowAlert(false);
+        }, 5000);
     } finally {
       setLoad(false);
+      setLogin(false);
     }
   };
 
@@ -46,8 +58,11 @@ export default function LoginPage() {
     }
   }, [user]);
 
-  return (
-    <span className="bg-gray-300 min-h-screen flex flex-col">
+  return <>
+
+  <Header/>
+
+    <span className="bg-gray-300 min-h-[85vh] flex flex-col overflow-hidden">
       {showAlert && (
         <Alert variant="filled" severity="error">
           Check credentials
@@ -62,9 +77,7 @@ export default function LoginPage() {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="username"
             placeholder="username"
-            onChange={(e) =>
-              setUser({ ...user, username: e.target.value })
-            }
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
           />
 
           <input
@@ -108,8 +121,18 @@ export default function LoginPage() {
               <CircularProgress />
             </div>
           )}
+            {login && (
+                <div className="flex">
+                  <Alert variant="filled" severity="success" color="info">
+                  Login Successful , Redirecting to Profile Page
+                </Alert>
+                </div>
+              )}
+          
         </div>
       </div>
     </span>
-  );
+
+    <Footer/>
+  </>
 }

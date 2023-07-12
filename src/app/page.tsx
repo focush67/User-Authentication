@@ -1,6 +1,12 @@
-
+import Header from "./Home/Header/page"
+import Footer from "./Home/Footer/page"
+import Mid from "./Home/Mid/page"
 export default function Home() {
   return (
-    <div className="flex m-[50%]">Hello</div>
+    <>
+      <Header/>
+      <Mid/>
+      <Footer/>
+    </>
   )
 }
