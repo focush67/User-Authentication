@@ -18,7 +18,7 @@ export async function POST(request:NextRequest)
 
         const user = await User.findOne({email});
 
-        if(user)
+        if(user || user.password.length < 8)
         {
             return NextResponse.json({error:"User already exists"} , {status:400});
         }
