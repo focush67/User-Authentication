@@ -14,7 +14,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
-  const [login, setLogin] = useState(false);
+  
   const [load, setLoad] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -27,11 +27,13 @@ export default function LoginPage() {
       const response = await axios.post("/api/users/login", user);
       const status = response.status;
 
+    
       if (status === 400 || status === 409) {
         setShowAlert(true);
+        
         setTimeout(() => {
           setShowAlert(false);
-        }, 5000);
+        }, 4000);
 
       } else {
         console.log(response.data);
@@ -40,13 +42,13 @@ export default function LoginPage() {
     } catch (error) {
       console.error("Login failed:", error);
       setShowAlert(true);
-      setLogin(true);
+      
       setTimeout(() => {
           setShowAlert(false);
-        }, 5000);
+        }, 4000);
     } finally {
       setLoad(false);
-      setLogin(false);
+      
     }
   };
 
@@ -56,7 +58,7 @@ export default function LoginPage() {
     } else {
       setButtonDisabled(true);
     }
-  }, [user]);
+  }, [user,showAlert]);
 
   return <>
 
@@ -70,6 +72,8 @@ export default function LoginPage() {
       )}
 
       <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm">
+
+
         <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
           <h1 className="mb-8 text-3xl text-center font-semibold">Sign In</h1>
           <input
@@ -121,13 +125,7 @@ export default function LoginPage() {
               <CircularProgress />
             </div>
           )}
-            {login && (
-                <div className="flex">
-                  <Alert variant="filled" severity="success" color="info">
-                  Login Successful , Redirecting to Profile Page
-                </Alert>
-                </div>
-              )}
+            
           
         </div>
       </div>

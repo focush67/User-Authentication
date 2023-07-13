@@ -4,8 +4,8 @@ import Link from "next/dist/client/link";
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 text-center text-white">
-      <div className="container px-6 pt-6">
-        <div className="mb-6 flex justify-center">
+      <div className="container px-6 pt-6 mx-3 justify-center">
+        <div className="mb-4 flex justify-center">
           <Link
             href="#!"
             type="button"

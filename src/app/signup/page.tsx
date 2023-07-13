@@ -31,7 +31,9 @@ const SignUpPage = () => {
           setUserAlert(false);
         }, 5000);
         setUser({ ...user, email: "", password: "" }); // Clear input fields
-      } else if (user.password.length < 8) {
+      } 
+      
+      else if (status === 410) {
         setDataAlert(true);
         setTimeout(() => {
           setDataAlert(false);
@@ -52,7 +54,7 @@ const SignUpPage = () => {
   useEffect(() => {
     if (
       user.email.length > 0 &&
-      user.password.length > 0 &&
+      user.password.length >= 8 && 
       user.username.length >= 0
     ) {
       setButtonDisabled(false);
