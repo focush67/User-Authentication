@@ -15,12 +15,13 @@ export default function LoginPage() {
     password: "",
   });
   
-  let temp = user;
+  
   const [load, setLoad] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const onLogin = async () => {
+  const onLogin = async (event : any) => {
+    event.preventDefault();
     try {
       setLoad(true);
       setShowAlert(false);
@@ -67,7 +68,7 @@ export default function LoginPage() {
   return <>
 
   <Header/>
-  <form>
+  <form onSubmit={onLogin}>
     <span className="bg-gray-300 min-h-[85vh] flex flex-col overflow-hidden">
       {showAlert && (
         <Alert variant="filled" severity="error">
