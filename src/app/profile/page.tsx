@@ -11,7 +11,7 @@ const LandingPage = () => {
   }
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+    <div className=" bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
       <div className='absolute top-0 right-0 m-4'>
         <Button variant='contained' onClick={onLogout}>Logout</Button>
       </div>

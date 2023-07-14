@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/dist/client/link";
 const Footer = () => {
   return (
-    <footer className="bg-neutral-900 text-center text-white">
+    <footer className="bg-neutral-900 text-center text-white min-w-[100vw]">
       <div className="container px-6 pt-6 mx-3 justify-center">
         <div className="mb-4 flex justify-center">
           <Link

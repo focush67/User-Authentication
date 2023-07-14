@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Header: React.FC = () => {
   return (
-    <header className="h-[20%]">
+    <header className="h-[20%] min-w-[100vw]">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl py-2">
           <Link href="https://flowbite.com" className="flex items-center">

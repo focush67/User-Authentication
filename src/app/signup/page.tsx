@@ -74,12 +74,13 @@ const SignUpPage = () => {
 
   return (
     <>
+    
       <Header />
       <form onSubmit={handleSubmit}>
-      <span className="bg-gray-300 min-h-[85vh] flex flex-col">
+      <span className="bg-gray-300 min-h-[85vh] flex flex-col min-w-[100vw]">
         {userAlert && <Alert severity="warning">User already exists</Alert>}
         
-        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm">
+        <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm overflow-hidden">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-3xl text-center font-semibold">Sign Up</h1>
             <input

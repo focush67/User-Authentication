@@ -51,7 +51,7 @@ export default function LoginPage() {
         }, 9000);
     } finally {
       setLoad(false);
-      
+      setUser({...user,username:"",email:"",password:""})
     }
   };
 
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
   <Header/>
   <form onSubmit={onLogin}>
-    <span className="bg-gray-300 min-h-[85vh] flex flex-col overflow-hidden">
+    <span className=" bg-gray-300 min-h-[85vh] min-w-[100vw] flex flex-col overflow-hidden">
       {showAlert && (
         <Alert variant="filled" severity="error">
           Check credentials

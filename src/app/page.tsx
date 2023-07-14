@@ -4,9 +4,11 @@ import Mid from "./Home/Mid/page"
 export default function Home() {
   return (
     <>
+    
       <Header/>
       <Mid/>
       <Footer/>
+    
     </>
   )
 }
