@@ -1,17 +1,27 @@
 'use client';
 import React from 'react';
-
+import axios from 'axios';
+import Link from 'next/link';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 const LandingPage = () => {
 
   const router = useRouter();
-  const onLogout = () => {
+  const onLogout = async () => {
+    try {
+      
+      await axios.get('/api/users/logout');
       router.push('/login');
+
+    } catch (error:any) {
+      console.log(error.message);
+    }
+
+      // router.push('/login');
   }
 
   return (
-    <div className=" bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
       <div className='absolute top-0 right-0 m-4'>
         <Button variant='contained' onClick={onLogout}>Logout</Button>
       </div>
