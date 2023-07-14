@@ -15,6 +15,7 @@ export default function LoginPage() {
     password: "",
   });
   
+  let temp = user;
   const [load, setLoad] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -33,6 +34,7 @@ export default function LoginPage() {
         
         setTimeout(() => {
           setShowAlert(false);
+          setUser({username:"",email:"",password:""});
         }, 4000);
 
       } else {
@@ -45,12 +47,14 @@ export default function LoginPage() {
       
       setTimeout(() => {
           setShowAlert(false);
-        }, 4000);
+        }, 9000);
     } finally {
       setLoad(false);
       
     }
   };
+
+  
 
   useEffect(() => {
     if (user.email.length > 0 && user.password.length > 0) {
@@ -63,7 +67,7 @@ export default function LoginPage() {
   return <>
 
   <Header/>
-
+  <form>
     <span className="bg-gray-300 min-h-[85vh] flex flex-col overflow-hidden">
       {showAlert && (
         <Alert variant="filled" severity="error">
@@ -130,7 +134,7 @@ export default function LoginPage() {
         </div>
       </div>
     </span>
-
+</form>
     <Footer/>
   </>
 }

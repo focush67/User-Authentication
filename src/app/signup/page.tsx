@@ -12,39 +12,48 @@ const SignUpPage = () => {
   const [load, setLoad] = useState(false);
   const [userAlert, setUserAlert] = useState(false);
   const router = useRouter();
-  const [dataAlert, setDataAlert] = useState(false);
   const [user, setUser] = useState({
     username: "",
     email: "",
     password: "",
   });
 
+
+  const handleSubmit = () => {
+    
+    setUser({
+      username:"",
+      email:"",
+      password:"",
+    });
+      
+  }
+
   const onSignUp = async () => {
+
     try {
       setLoad(true);
       const response = await axios.post("/api/users/signup", user);
       const status = response.status;
-
+      console.log(response.status);
       if (status === 400) {
         setUserAlert(true);
         setTimeout(() => {
           setUserAlert(false);
         }, 5000);
-        setUser({ ...user, email: "", password: "" }); // Clear input fields
+         
       } 
       
-      else if (status === 410) {
-        setDataAlert(true);
-        setTimeout(() => {
-          setDataAlert(false);
-        }, 3000);
-      } else {
+      
+      else {
         console.log("SIGNUP SUCCESSFUL", response.data);
         router.push("/login");
       }
-    } catch (error:any) {
+    } 
+    catch (error:any) {
       console.log("SIGNUP FAILED", error.message);
-    } finally {
+    } 
+    finally {
       setTimeout(() => {
         setLoad(false);
       }, 3000);
@@ -66,13 +75,10 @@ const SignUpPage = () => {
   return (
     <>
       <Header />
+      <form onSubmit={handleSubmit}>
       <span className="bg-gray-300 min-h-[85vh] flex flex-col">
         {userAlert && <Alert severity="warning">User already exists</Alert>}
-        {dataAlert && (
-          <Alert severity="error" variant="filled">
-            Check Inputs
-          </Alert>
-        )}
+        
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
             <h1 className="mb-8 text-3xl text-center font-semibold">Sign Up</h1>
@@ -139,11 +145,14 @@ const SignUpPage = () => {
           </div>
           {load && (
             <div className="flex justify-center">
-              <CircularProgress />
+              <CircularProgress 
+              
+              />
             </div>
           )}
         </div>
       </span>
+      </form>
       <Footer />
     </>
   );
