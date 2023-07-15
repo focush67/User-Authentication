@@ -1,12 +1,20 @@
 'use client';
 import React from 'react';
 import { Button } from '@mui/material';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 const LandingPage: React.FC = ({params} : any) => {
 
   const router = useRouter();
-  const onLogout = () => {
+  const onLogout = async () => {
+       try {
+      
+      await axios.get('/api/users/logout');
       router.push('/login');
+
+    } catch (error:any) {
+      console.log(error.message);
+    }
   }
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">

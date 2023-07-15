@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import axios from 'axios';
-import Link from 'next/link';
+
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 const LandingPage = () => {
@@ -17,7 +17,6 @@ const LandingPage = () => {
       console.log(error.message);
     }
 
-      // router.push('/login');
   }
 
   return (

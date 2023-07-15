@@ -33,7 +33,7 @@ const SignUpPage = () => {
 
     try {
       setLoad(true);
-      const response = await axios.post("/api/users/signup", user);
+      const response = await axios.post("/app/api/users/signup", user);
       const status = response.status;
       console.log(response.status);
       if (status === 400) {
