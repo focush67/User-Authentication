@@ -19,36 +19,32 @@ const SignUpPage = () => {
   });
 
 
-  const handleSubmit = () => {
-    
+  const handleSubmit = (event:any) => {
+    event.preventDefault();
     setUser({
       username:"",
       email:"",
       password:"",
     });
       
-  }
+  };
 
   const onSignUp = async () => {
-
+    
     try {
       setLoad(true);
-      const response = await axios.post("/app/api/users/signup", user);
+      const response = await axios.post("/api/users/signup", user);
+      
       const status = response.status;
-      console.log(response.status);
-      if (status === 400) {
-        setUserAlert(true);
-        setTimeout(() => {
-          setUserAlert(false);
-        }, 5000);
-         
+      
+      if ( status && status === 400) {
+        setUserAlert(true); 
       } 
       
-      
-      else {
-        console.log("SIGNUP SUCCESSFUL", response.data);
-        router.push("/login");
+      else{
+        router.push('/login');
       }
+      
     } 
     catch (error:any) {
       console.log("SIGNUP FAILED", error.message);
@@ -56,7 +52,7 @@ const SignUpPage = () => {
     finally {
       setTimeout(() => {
         setLoad(false);
-      }, 3000);
+      }, 5000);
     }
   };
 
@@ -78,7 +74,10 @@ const SignUpPage = () => {
       <Header />
       <form onSubmit={handleSubmit}>
       <span className="bg-gray-300 min-h-[85vh] flex flex-col min-w-[100vw]">
-        {userAlert && <Alert severity="warning">User already exists</Alert>}
+        
+        <div>
+          {userAlert && <Alert severity="warning">User already exists</Alert>}
+        </div>
         
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm overflow-hidden">
           <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">

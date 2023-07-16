@@ -12,7 +12,7 @@ export async function POST(request:NextRequest)
         const requestBody = await request.json();
         const {username,email,password} = requestBody;
 
-        console.log(requestBody);
+        console.log(requestBody.username);
 
         //checking if user already exists
 
@@ -20,7 +20,7 @@ export async function POST(request:NextRequest)
 
         if(user)
         {
-            console.log("user already exists");
+            console.log("USER ALREADY EXISTS : 400");
             return NextResponse.json({error:"User already exists"} , {status:400});
         }
 

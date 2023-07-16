@@ -1,12 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
+import Link from 'next/link';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 const LandingPage = () => {
 
   const router = useRouter();
+  const [data,setData] = useState("nothing");
   const onLogout = async () => {
     try {
       
@@ -19,6 +20,18 @@ const LandingPage = () => {
 
   }
 
+  const getUserDetails = async () => {
+  try {
+    const response = await axios.get('/api/users/person');
+    console.log(response.data);
+    setData(response.data.data._id);
+  } catch (error) {
+    console.error('Error fetching user details:', error);
+    
+  }
+};
+
+
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
       <div className='absolute top-0 right-0 m-4'>
@@ -26,7 +39,7 @@ const LandingPage = () => {
       </div>
       <h1 className="text-5xl font-bold mb-8">Welcome to Our Website</h1>
       <p className="text-xl mb-12">
-        Discover amazing products and services that will enhance your life.
+        {data === 'nothing' ? "Nothing" : <Link href={`/profile/${data}`}>{data}</Link>}
       </p>
       <a
         href="/products"
@@ -34,6 +47,10 @@ const LandingPage = () => {
       >
         Explore Products
       </a>
+
+      <div className='absolute top-0 left-0 m-4'>
+        <Button variant='contained' onClick={getUserDetails}>Details</Button>
+      </div>
     </div>
   );
 };
