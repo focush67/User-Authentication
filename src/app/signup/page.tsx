@@ -37,7 +37,7 @@ const SignUpPage = () => {
       
       const status = response.status;
       
-      if ( status && status === 400) {
+      if (status === 400) {
         setUserAlert(true); 
       } 
       
@@ -52,6 +52,7 @@ const SignUpPage = () => {
     finally {
       setTimeout(() => {
         setLoad(false);
+        setUserAlert(false);
       }, 5000);
     }
   };
@@ -76,7 +77,11 @@ const SignUpPage = () => {
       <span className="bg-gray-300 min-h-[85vh] flex flex-col min-w-[100vw]">
         
         <div>
-          {userAlert && <Alert severity="warning">User already exists</Alert>}
+          {userAlert && (
+            <div className="mt-4">
+              <Alert severity="warning">User already exists</Alert>
+            </div>
+          )}
         </div>
         
         <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 shadow-sm overflow-hidden">

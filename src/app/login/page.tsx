@@ -20,6 +20,10 @@ export default function LoginPage() {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
+  const handleSubmit = (event:any) => {
+    event.preventDefault();
+  }
+
   const onLogin = async (event : any) => {
     event.preventDefault();
     try {
@@ -63,12 +67,15 @@ export default function LoginPage() {
     } else {
       setButtonDisabled(true);
     }
+
+    
+
   }, [user,showAlert]);
 
   return <>
 
   <Header/>
-  <form onSubmit={onLogin}>
+  <form>
     <span className=" bg-gray-300 min-h-[85vh] min-w-[100vw] flex flex-col overflow-hidden">
       {showAlert && (
         <Alert variant="filled" severity="error">

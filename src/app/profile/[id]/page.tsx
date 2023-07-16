@@ -21,7 +21,8 @@ const LandingPage: React.FC = ({params} : any) => {
       <div className='absolute top-0 right-0 m-4'>
         <Button variant='contained' onClick={onLogout}>Logout</Button>
       </div>
-      <h1 className="text-5xl font-bold mb-8">Welcome {params.id}</h1>
+      <h1 className="text-5xl font-bold mb-8">Welcome</h1>
+      <p className='mb-3'>{params.id}</p>
       <p className="text-xl mb-12">
         Discover amazing products and services that will enhance your life.
       </p>

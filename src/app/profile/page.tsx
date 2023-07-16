@@ -24,13 +24,12 @@ const LandingPage = () => {
   try {
     const response = await axios.get('/api/users/person');
     console.log(response.data);
-    setData(response.data.data._id);
+    setData(response.data.data.username);
   } catch (error) {
     console.error('Error fetching user details:', error);
     
   }
 };
-
 
   return (
     <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center">
@@ -39,7 +38,7 @@ const LandingPage = () => {
       </div>
       <h1 className="text-5xl font-bold mb-8">Welcome to Our Website</h1>
       <p className="text-xl mb-12">
-        {data === 'nothing' ? "Nothing" : <Link href={`/profile/${data}`}>{data}</Link>}
+        {data === 'nothing' ? "" : <Link href={`/profile/${data}`}>{data}</Link>}
       </p>
       <a
         href="/products"

@@ -6,6 +6,7 @@ export async function GET() {
       success: true,
     });
 
+    console.log("Deleting Token");
     response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
     return response;
   } catch (error: any) {
