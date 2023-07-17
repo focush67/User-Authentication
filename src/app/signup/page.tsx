@@ -34,7 +34,7 @@ const SignUpPage = () => {
     try {
       setLoad(true);
       const response = await axios.post("/api/users/signup", user);
-      
+
       const status = response.status;
       
       if (status === 400) {
@@ -42,7 +42,7 @@ const SignUpPage = () => {
       } 
       
       else{
-        router.push('/login');
+        router.push('/verifyEmail');
       }
       
     } 
