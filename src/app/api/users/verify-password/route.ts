@@ -3,8 +3,6 @@ import bcryptjs from 'bcryptjs';
 import User from "@/models/userModel";
 import { connect } from "@/dbConfig/dbConfig";
 
-connect();
-
 export const POST = async(request : NextRequest)=>
 {
     try {
@@ -15,7 +13,7 @@ export const POST = async(request : NextRequest)=>
 
         const newHashedPassword = await bcryptjs.hash(password,salt);
 
-        const user = await User.findOneAndUpdate({forgotPasswordToken:token , forgotPasswordTokenExpiry:{$gt:Date.now()}},{password:newHashedPassword});
+        const user = await User.findOneAndUpdate({forgotPasswordToken:token , forgotPasswordTokenExpiry:{$gt:Date.now()}},{new : true});
 
         if(!user)
         {
