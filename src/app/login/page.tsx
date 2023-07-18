@@ -137,6 +137,10 @@ export default function LoginPage() {
               <CircularProgress />
             </div>
           )}
+
+          <div className="flex justify-center">
+            <Link href={"/reset-password-page"} className="text-blue-600">Forgot Password</Link>
+          </div>
             
           
         </div>

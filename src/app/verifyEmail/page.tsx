@@ -1,14 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
+
 export default function verifyEmailPage() {
   const [token, setToken] = useState("");
   const [verify, setVerify] = useState(false);
   const [error, setError] = useState(false);
+  const router = useRouter();
 
-  const verifyUserEmail = async () => {
+  
+
+   const verifyUserEmail = async () => {
     try {
       await axios.post("/api/users/verifyEmail", { token });
 
@@ -33,6 +40,7 @@ export default function verifyEmailPage() {
 
 
   return (
+    
     <div className="flex flex-col items-center justify-center h-screen bg-gray-300">
       <div className="bg-gray-100 p-8 rounded shadow-lg justify-center">
         <h2 className="text-2xl font-bold mb-4 justify-center">Email Verification</h2>
