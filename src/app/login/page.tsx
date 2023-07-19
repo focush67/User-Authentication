@@ -9,6 +9,12 @@ import Header from "../Home/Header/page";
 import Footer from "../Home/Footer/page";
 export default function LoginPage() {
   const router = useRouter();
+  const [formState,setFormState] = useState({
+    username : "",
+    email : "",
+    password : "",
+  });
+
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -19,6 +25,8 @@ export default function LoginPage() {
   const [load, setLoad] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+
+  const isFormValid = formState.email.length > 0 && formState.password.length > 0
 
   const handleSubmit = (event:any) => {
     event.preventDefault();
@@ -36,11 +44,11 @@ export default function LoginPage() {
     
       if (status === 400 || status === 409) {
         setShowAlert(true);
-        
+       
         setTimeout(() => {
           setShowAlert(false);
-          setUser({username:"",email:"",password:""});
-        }, 4000);
+          
+        }, 3000);
 
       } else {
         console.log(response.data);
@@ -55,7 +63,7 @@ export default function LoginPage() {
         }, 9000);
     } finally {
       setLoad(false);
-      setUser({...user,username:"",email:"",password:""})
+      setUser({username:"",email:"",password:""})
     }
   };
 
@@ -67,10 +75,7 @@ export default function LoginPage() {
     } else {
       setButtonDisabled(true);
     }
-
-    
-
-  }, [user,showAlert]);
+  }, [user.email, user.password]);
 
   return <>
 
@@ -102,7 +107,11 @@ export default function LoginPage() {
             name="email"
             placeholder="Email*"
             required
-            onChange={(e) => setUser({ ...user, email: e.target.value })}
+            onChange={(e) => {
+              setUser({ ...user, email: e.target.value })
+
+              setFormState({...formState,email:e.target.value})
+              }}
           />
 
           <input
@@ -111,14 +120,17 @@ export default function LoginPage() {
             name="password"
             placeholder="Password*"
             required
-            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            onChange={(e) => {setUser({ ...user, password: e.target.value })
+            
+            setFormState({...formState,password:e.target.value})
+            }}
           />
 
           <button
             type="submit"
             className="w-full text-center py-3 rounded bg-green-700 text-white hover:bg-green-600 focus:outline-none my-1"
             onClick={onLogin}
-            disabled={buttonDisabled}
+            disabled={!isFormValid}
           >
             Log In
           </button>
